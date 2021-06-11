@@ -19,8 +19,8 @@ const saveDashboard = (url) => {
         } else {
             pass = false;
         }
-        return pass;
     }
+    return pass;
 }
 
 const getDasboards = () => {
