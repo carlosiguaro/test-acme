@@ -5,7 +5,6 @@ import { Route as RoutesList } from '../../routes/routes';
 import NotFound from '../HttpErrorHanddling/404'
 
 const Routes = () => {
-    console.log(RoutesList);
     return (
         <div>
             <Switch>

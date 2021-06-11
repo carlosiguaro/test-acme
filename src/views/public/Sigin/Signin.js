@@ -1,8 +1,18 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
 import { Button, Form, Header, Icon, Message } from 'semantic-ui-react'
-import { authUser } from '../../../services/user.auth.services';
+import { authUser, registerSession, verifySession } from '../../../services/user.auth.services';
+
 function Signin(){
-    const x = false;
+    const history = useHistory();
+
+    useEffect(() => {
+        if (verifySession()) {
+            history.push('/home')
+        }
+    }, []);
+
+
     const [state, setState] = useState({
         loading: false,
         validationMsg: {
@@ -30,18 +40,17 @@ function Signin(){
                 password: state.password
             })
             .then((res) => {
-                console.log(res)
-                console.log(res.non_field_errors)
+                if (res.data.token) {
+                    if (registerSession(res.data.token)) {
+                        history.push('/home');
+                    }
+                }
             })
             .catch((err) => {
-                console.log(err)
-                console.log(err.response.data)
                 try {
+                    
                     if (err.response.data) {
                         if (err.response.data.non_field_errors) {
-                            
-                            console.log('here')
-                            console.log(err.response.data.non_field_errors)
 
                             setState({
                                 ...state,
@@ -112,9 +121,6 @@ function Signin(){
             pass = false;            
         }
 
-        console.log(valMsg);
-        console.log(pass);
-
         setState({
             ...state,
             validationMsg: {
@@ -129,10 +135,10 @@ function Signin(){
     return (
         <div className="container-fluid min-vh-100 d-flex justify-content-center align-items-center">
             <div className="row w-100 d-flex justify-content-center">
-                <div className="col-sm-8 col-md-8 p-4 bg-white rounded shadow">
+                <div className="col-sm-12 col-md-8 col-lg-6 col-xl-4 p-4 bg-white rounded shadow">
                 
                     <Header as='h1' className='text-center mb-4'>
-                        --- inc.
+                        Acme inc.
                     </Header>
 
                     <Form loading = {state.loading}>

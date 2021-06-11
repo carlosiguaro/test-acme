@@ -1,0 +1,8 @@
+div.session-destroy::before{
+    content: '|';
+    margin: 0 1em;
+}
+
+div.error-hand{
+    
+}

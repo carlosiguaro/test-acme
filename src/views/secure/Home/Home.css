@@ -1,0 +1,41 @@
+div.dash-column{
+    display: flex;
+    overflow-x: auto;
+    padding: 2em 0;
+}
+div.dash-column > div{
+    margin: 0 1em;
+    height: 350px;
+    border: 1px solid #c2c2c2;
+    padding: 1em;
+    border-radius: .2em;
+}
+div.dash-column > div > iframe{
+    height: 100%;
+}
+
+
+div.dash-table{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+div.dash-table > div{
+    width: 45%;
+    height: 350px;
+    margin: 1em;
+    border: 1px solid #c2c2c2;
+    padding: 1em;
+    border-radius: .2em;
+}
+
+div.dash-table > div > iframe{
+    height: 100%;
+    width: 100%;
+}
+
+div.result-view{
+    background: #e0e1e2;
+    padding: 0 1em;
+    border-radius: .3em;
+}
