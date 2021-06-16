@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, Fragment } from 'react';
 import { useHistory } from 'react-router';
 import { Link } from 'react-router-dom';
 import { Header, Icon, Button, Form, Table } from 'semantic-ui-react'
@@ -32,6 +32,9 @@ function RegisterDashboard(){
                     setUrl('');
                     document.querySelector("input[name='URL']").value = '';
                 }, 1000);
+            } else {
+                setErrorUrl('La url ya ha sido registrada');
+                seLoading(false);
             }
         }
     }
@@ -52,7 +55,8 @@ function RegisterDashboard(){
 
     const validateUrl = () => {
 
-        var expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi,
+        // var expression = /[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi,
+        var expression = /^(https?:\/\/[\w\-]|[w]{0,3})+(\.[\w\-]+)+[/#?]?.*$/,
             regex = new RegExp(expression),
             pass = true;
         
@@ -111,29 +115,36 @@ function RegisterDashboard(){
 
                 <Button fluid onClick={e => registerUrl(e)}>Registrar dashboard</Button>
             </Form>
+            
+            {dashboards.length > 0 &&
+                <Fragment>
+                    <h2>Url registradas</h2>
 
-            <h2>Url registradas</h2>
+                    <Table celled fixed singleLine>
+                        <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>Url</Table.HeaderCell>
+                        </Table.Row>
+                        </Table.Header>
 
-            <Table celled fixed singleLine>
-                <Table.Header>
-                <Table.Row>
-                    <Table.HeaderCell>Url</Table.HeaderCell>
-                </Table.Row>
-                </Table.Header>
-
-                <Table.Body>
-                    {
-                        dashboards.map((url, key) => {
-                            return (
-                                <Table.Row>
-                                    <Table.Cell key={key}>{url}</Table.Cell>
-                                </Table.Row>
-                            )
-                        })
-                    }
-                    
-                </Table.Body>
-            </Table>
+                        <Table.Body>
+                            {
+                                dashboards.map((url, key) => {
+                                    console.log(key)
+                                    return (
+                                        <Fragment key={key}>
+                                            <Table.Row>
+                                                <Table.Cell key={key}>{url}</Table.Cell>
+                                            </Table.Row>
+                                        </Fragment>
+                                    )
+                                })
+                            }
+                            
+                        </Table.Body>
+                    </Table>
+                </Fragment>
+            }
         </div>
     )
 }

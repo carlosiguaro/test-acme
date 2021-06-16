@@ -35,7 +35,6 @@ function Home(){
             case 'DIV':
                 currentEl = element.querySelector('span');
                 break;
-
             case 'SPAN':
                 currentEl = element;
                 break;
@@ -50,7 +49,6 @@ function Home(){
         if (mode == 'Columna') {
             defMode = 'dash-column';
         } else if(mode == 'Tabla') {
-
             defMode = 'dash-table';
         }
         setClassView(defMode)
@@ -136,15 +134,15 @@ function Home(){
                             dashboards.map((url, key) => {
 
                                 return (
-                                    <div>
-                                        <iframe src={url} key={key}></iframe>
+                                    <div key={key}>
+                                        <iframe src={url}></iframe>
                                     </div>
                                 )
                             })
                         }
                     </Fragment>
                 }
-                {!dashboards.length &&  <label>No existen dashboard registrados</label> }
+                {!dashboards.length &&  <label>No existen dashboard's registrados</label> }
             </div>
         </div>
     )
